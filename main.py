@@ -1,8 +1,9 @@
 produtos = []
 continuar = True
 
-def mostrar_menu():
+def mostrar_menu(qtd_produtos):
     print('===MENU===')
+    print(f"Produtos cadastrados: {qtd_produtos}")
     print('1 - Cadastrar produto')
     print('2 - Consultar produto')
     print('0 - Sair')
@@ -18,13 +19,14 @@ def cadastrar_produto(produtos):
             print("Preço inválido. Digite um valor maior que zero.")
     produtos.append((nome, preco))
     print('Produto cadastrado com sucesso!')
+    print(f"Total de produtos: {len(produtos)}")
 
 def consultar_produto(produtos):
     nome_busca = input("Digite o nome do produto: ")
     encontrado = False
     i = 0
     while i < len(produtos) and not encontrado:
-        if produtos[i][0] == nome_busca:
+        if produtos[i][0].lower() == nome_busca.lower():
             print(
                 f"Produto encontrado: "
                 f"{produtos[i][0]} - R$ {produtos[i][1]:.2f}"
@@ -35,7 +37,7 @@ def consultar_produto(produtos):
         print("Produto não encontrado.")
 
 while continuar:
-    mostrar_menu()
+    mostrar_menu(len(produtos))
     opcao = input("Escolha uma opção: ")
     if opcao == "1":
         cadastrar_produto(produtos)
