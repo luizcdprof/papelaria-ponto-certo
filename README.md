@@ -15,3 +15,6 @@ Nesta semana, você vai aprender a armazenar dados em memória e desenvolver as 
 
 ### Aula 03: Implementando o cadastro e a consulta de produtos
 **Objetivo:** implementar e testar as funcionalidades de cadastro e consulta de produtos utilizando listas em memória no sistema da Papelaria Ponto Certo.
+
+### Aula 04: Finalizando a primeira versão do sistema
+**Objetivo:** ampliar o sistema da Papelaria Ponto Certo com a funcionalidade de listagem de produtos armazenados em memória, tornando o cadastro mais completo e fácil de utilizar.
