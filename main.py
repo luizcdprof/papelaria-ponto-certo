@@ -1,9 +1,39 @@
 produtos = [
     ('Caneta', 2.50),
     ('Caderno', 18.90),
+    ('Mochila', 45.90),
     ('Borracha', 3.00)
 ]
+
+vendas = [
+    ['Caderno', 10, '2026-01-15'],
+    ['Caderno', 12, '2026-02-10'],
+    ['Caderno', 8, '2026-03-05'],
+    ['Caderno', 14, '2026-04-05'],
+    ['Caderno', 16, '2026-05-01'],
+    ['Caderno', 18, '2026-06-15'],
+    ['Caderno', 20, '2026-07-10'],
+
+    ['Caneta', 40, '2026-02-20'],
+    ['Caneta', 30, '2026-03-10'],
+    ['Caneta', 20, '2026-04-05'],
+    ['Caneta', 10, '2026-05-01'],
+    ['Caneta', 5, '2026-06-15'],
+    ['Caneta', 15, '2026-07-10'],
+
+    ['Mochila', 35, '2026-02-05'],
+    ['Mochila', 42, '2026-03-12'],
+    ['Mochila', 38, '2026-04-18'],
+    ['Mochila', 45, '2026-05-20'],
+
+    ['Borracha', 3, '2026-02-08'],
+    ['Borracha', 5, '2026-03-15'],
+    ['Borracha', 4, '2026-04-10'],
+    ['Borracha', 6, '2026-05-14'],
+]
+
 continuar = True
+
 
 def mostrar_menu(qtd_produtos):
     print('=== MENU ===')
@@ -11,7 +41,9 @@ def mostrar_menu(qtd_produtos):
     print('1 - Cadastrar produto')
     print('2 - Consultar produto')
     print('3 - Listar produtos')
+    print('4 - Consultar desempenho de vendas')
     print('0 - Sair')
+
 
 def cadastrar_produto(produtos):
     nome = input('Nome do produto: ')
@@ -25,6 +57,7 @@ def cadastrar_produto(produtos):
     produtos.insert(0, (nome, preco))
     print('Produto cadastrado com sucesso!')
     print(f'Total de produtos: {len(produtos)}')
+
 
 def consultar_produto(produtos):
     nome_busca = input('Digite o nome do produto: ')
@@ -41,6 +74,7 @@ def consultar_produto(produtos):
     if not encontrado:
         print('Produto não encontrado.')
 
+
 def listar_produtos(produtos):
     if len(produtos) == 0:
         print('Nenhum produto cadastrado.')
@@ -54,6 +88,43 @@ def listar_produtos(produtos):
     print(f'\nTotal de produtos: {len(produtos)}')
     print(f'Total de produtos: {len(produtos)}')
 
+
+def calcular_media_vendas(vendas, nome):
+    quantidades = []
+
+    for item in vendas:
+        if item[0].lower() == nome.lower():
+            quantidades.append(item[1])
+
+    if len(quantidades) == 0:
+        return None
+
+    return sum(quantidades) / len(quantidades)
+
+
+def classificar_desempenho(media):
+    if media is None:
+        return 'Sem histórico'
+    elif media >= 30:
+        return 'Alto'
+    elif media >= 10:
+        return 'Médio'
+    else:
+        return 'Baixo'
+
+
+def consultar_desempenho(vendas):
+    nome = input('Nome do produto: ').strip()
+    media = calcular_media_vendas(vendas, nome)
+    desempenho = classificar_desempenho(media)
+
+    print('Produto:', nome)
+    if media is None:
+        print('Média de vendas: Sem histórico')
+    else:
+        print('Média de vendas:', media)
+    print('Desempenho:', desempenho)
+
 while continuar:
     mostrar_menu(len(produtos))
     opcao = input('Escolha uma opção: ')
@@ -62,8 +133,11 @@ while continuar:
     elif opcao == '2':
         consultar_produto(produtos)
     elif opcao == '3':
-        listar_produtos(produtos)
+            listar_produtos(produtos)
+    elif opcao == '4':
+        consultar_desempenho(produtos)
     elif opcao == '0':
         continuar = False
+        print('Encerrando o programa...')
     else:
         print('Opção inválida...')

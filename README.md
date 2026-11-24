@@ -18,3 +18,8 @@ Nesta semana, você vai aprender a armazenar dados em memória e desenvolver as 
 
 ### Aula 04: Finalizando a primeira versão do sistema
 **Objetivo:** ampliar o sistema da Papelaria Ponto Certo com a funcionalidade de listagem de produtos armazenados em memória, tornando o cadastro mais completo e fácil de utilizar.
+
+## Semana 23: Médias, faixas e classificação
+
+### Aula 03: Desempenho de vendas no sistema da Papelaria Ponto Certo
+**Objetivo:** criar uma nova funcionalidade no sistema capaz de: informar um produto → calcular sua média de vendas → classificar o desempenho → exibir o resultado.
