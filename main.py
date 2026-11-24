@@ -42,6 +42,7 @@ def mostrar_menu(qtd_produtos):
     print('2 - Consultar produto')
     print('3 - Listar produtos')
     print('4 - Consultar desempenho de vendas')
+    print('5 - Ranking de desempenho')
     print('0 - Sair')
 
 
@@ -125,6 +126,42 @@ def consultar_desempenho(vendas):
         print('Média de vendas:', media)
     print('Desempenho:', desempenho)
 
+
+def nomes_unicos_vendas(vendas):
+    nomes = []
+    for item in vendas:
+        if item[0] not in nomes:
+            nomes.append(item[0])
+    return nomes
+
+
+def montar_resultados(vendas):
+    resultados = []
+
+    for nome in nomes_unicos_vendas(vendas):
+        media = calcular_media_vendas(vendas, nome)
+        desempenho = classificar_desempenho(media)
+        resultados.append([nome, media, desempenho])
+
+    resultados.sort(key=lambda item: item[1], reverse=True)
+    return resultados
+
+
+def exibir_ranking(vendas):
+    resultados = montar_resultados(vendas)
+
+    print('\nRANKING DE DESEMPENHO\n')
+    for i, item in enumerate(resultados, start=1):
+        print(f'{i}. {item[0]} - {item[1]:.1f} - {item[2]}')
+
+    with open('ranking.txt', 'w', encoding='utf-8') as arquivo:
+        for i, item in enumerate(resultados, start=1):
+            arquivo.write(
+                f'{i};{item[0]};{item[1]:.1f};{item[2]}\n'
+            )
+
+    print('\nRanking salvo em ranking.txt')
+
 while continuar:
     mostrar_menu(len(produtos))
     opcao = input('Escolha uma opção: ')
@@ -136,6 +173,8 @@ while continuar:
             listar_produtos(produtos)
     elif opcao == '4':
         consultar_desempenho(produtos)
+    elif opcao == '5':
+        exibir_ranking(vendas)
     elif opcao == '0':
         continuar = False
         print('Encerrando o programa...')
